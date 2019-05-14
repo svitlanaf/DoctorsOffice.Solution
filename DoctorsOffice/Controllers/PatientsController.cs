@@ -17,10 +17,11 @@ namespace DoctorsOffice.Controllers
           return View(allPatients);
       }
 
+
       [HttpGet("/patients/new")]
-      public ActionResult New(int id)
+      public ActionResult New()
       {
-          return View(id);
+          return View();
       }
 
 
