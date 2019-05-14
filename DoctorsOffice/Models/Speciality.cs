@@ -32,6 +32,49 @@ namespace DoctorsOffice.Models
     return this.GetId().GetHashCode();
     }
 
+    public override bool Equals(System.Object otherSpeciality)
+        {
+        if (!(otherSpeciality is Speciality))
+            {
+                return false;
+            }
+        else
+            {
+                Speciality newSpeciality = (Speciality) otherSpeciality;
+                bool idEquality = this.GetId() == newSpeciality.GetId();
+                bool nameEquality = this.GetName() == newSpeciality.GetName();
+                return (idEquality && nameEquality);
+            }
+        }
+
+    public void Dispose()
+    {
+      Speciality.ClearAll();
+    //   Flight.DeleteAll();
+    }
+
+     public void Save()
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO specialities (name) VALUES (@name);";
+
+        MySqlParameter name = new MySqlParameter();
+        name.ParameterName = "@name";
+        name.Value = this._name;
+        cmd.Parameters.Add(name);
+
+        cmd.ExecuteNonQuery();
+        _id = (int) cmd.LastInsertedId;
+        conn.Close();
+        if (conn != null)
+            {
+                conn.Dispose();
+            }
+    }
+
 
     public static List<Speciality> GetAll()
     {
@@ -97,8 +140,22 @@ namespace DoctorsOffice.Models
       }
     }
 
-    
+    public void Delete()
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = new MySqlCommand( "DELETE FROM specialities WHERE id = @SpecialityId; DELETE FROM specialities_doctors WHERE speciality_id = @SpecialityId;", conn);
+        MySqlParameter specialityIdParameter = new MySqlParameter();
+        specialityIdParameter.ParameterName = "@SpecialityId";
+        specialityIdParameter.Value = this.GetId();
+        cmd.Parameters.Add(specialityIdParameter);
+        cmd.ExecuteNonQuery();
 
+        if (conn != null)
+        {
+            conn.Close();
+        }
+    }
 
   }
 }
