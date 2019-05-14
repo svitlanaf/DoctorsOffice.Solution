@@ -50,7 +50,7 @@ namespace DoctorsOffice.Models
     public void Dispose()
     {
       Speciality.ClearAll();
-    //   Flight.DeleteAll();
+    //   Speciality.ClearAll();
     }
 
      public void Save()

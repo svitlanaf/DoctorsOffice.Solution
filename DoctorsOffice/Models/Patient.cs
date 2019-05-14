@@ -39,6 +39,14 @@ namespace DoctorsOffice.Models
     return this.GetId().GetHashCode();
     }
 
+
+    public void Dispose()
+    {
+      Doctor.ClearAll();
+      Patient.ClearAll();
+    }
+    
+
     public override bool Equals(System.Object otherPatient)
         {
         if (!(otherPatient is Patient))

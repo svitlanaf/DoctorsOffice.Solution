@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DoctorsOffice.Controllers
 {
-  public class DOctorsController : Controller
+  public class DoctorsController : Controller
   {
 
       [HttpGet("/doctors")]
@@ -25,7 +25,7 @@ namespace DoctorsOffice.Controllers
       }
 
 
-      [HttpPost("/doctors/create")]
+      [HttpPost("/doctors")]
     public ActionResult Create(string doctorName, string doctorSpeciality)
       {
         Doctor newDoctor = new Doctor(doctorName, doctorSpeciality);
@@ -40,10 +40,10 @@ namespace DoctorsOffice.Controllers
       {
           Dictionary<string, object> model = new Dictionary<string, object>();
           Doctor selectedDoctor = Doctor.Find(id);
-          List<Patient> categoryPatients = selectedDoctor.GetPatients();
+          List<Patient> doctorPatients = selectedDoctor.GetPatients();
           List<Patient> allPatients = Patient.GetAll();
           model.Add("doctor", selectedDoctor);
-          model.Add("doctorPatients", categoryPatients);  
+          model.Add("doctorPatients", doctorPatients);  
           model.Add("allPatients", allPatients);
           return View(model);
       }

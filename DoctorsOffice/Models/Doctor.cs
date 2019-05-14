@@ -41,7 +41,7 @@ namespace DoctorsOffice.Models
     public void Dispose()
     {
       Doctor.ClearAll();
-    //   .ClearAll();
+      Patient.ClearAll();
     }
 
 
@@ -160,7 +160,7 @@ namespace DoctorsOffice.Models
       return newDoctor;
     }
 
-        // Add deletespeciality later!!!
+        // Add delete speciality later!!!
     public void Delete()
     {
         MySqlConnection conn = DB.Connection();
@@ -186,8 +186,8 @@ namespace DoctorsOffice.Models
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
         cmd.CommandText = @"SELECT patients.* FROM 
-            doctors JOIN doctors_patients ON (doctors.id = doctors_patients.doctors_id)
-                    JOIN patients ON (doctors_patients.patients_id = patients.id)
+            doctors JOIN doctors_patients ON (doctors.id = doctors_patients.doctor_id)
+                    JOIN patients ON (doctors_patients.patient_id = patients.id)
                     WHERE doctors.id = @DoctorId;";
         MySqlParameter doctorIdParameter = new MySqlParameter();
         doctorIdParameter.ParameterName = "@DoctorId";
