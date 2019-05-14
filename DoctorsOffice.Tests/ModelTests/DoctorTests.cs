@@ -38,20 +38,20 @@ namespace DoctorsOffice.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
-  //   [TestMethod]
-  //   public void GetItems_ReturnsAllCategoryItems_ItemList()
-  //   {
-  //     Category testCategory = new Category("Household chores");
-  //     testCategory.Save();
-  //     Item testItem1 = new Item("Mow the lawn");
-  //     testItem1.Save();
-  //     Item testItem2 = new Item("Buy plane ticket");
-  //     testItem2.Save();
-  //     testCategory.AddItem(testItem1);
-  //     List<Item> savedItems = testCategory.GetItems();
-  //     List<Item> testList = new List<Item> {testItem1};
-  //     CollectionAssert.AreEqual(testList, savedItems);
-  //   }
+    [TestMethod]
+    public void GetPatients_ReturnsAllDoctorPatients_PatientList()
+    {
+      Doctor testDoctor = new Doctor("test", "test");
+      testDoctor.Save();
+      Patient testPatient = new Patient("test", new DateTime(1/2/2019));
+      testPatient.Save();
+      Patient testPatient2 = new Patient("test1", new DateTime(1/2/2019));
+      testPatient2.Save();
+      testDoctor.AddPatient(testPatient);
+      List<Patient> savedItems = testDoctor.GetPatients();
+      List<Patient> testList = new List<Patient> {testPatient};
+      CollectionAssert.AreEqual(testList, savedItems);
+    }
 
   }
 }
