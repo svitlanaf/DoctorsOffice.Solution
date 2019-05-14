@@ -13,7 +13,7 @@ namespace DoctorsOffice.Models
     public Doctor(string doctorName, string doctorSpeciality int id = 0)
     {
       _name = doctorName;
-      _speciality = doctorSpeciality
+      _speciality = doctorSpeciality;
       _id = id;
     }
 
@@ -51,7 +51,7 @@ namespace DoctorsOffice.Models
         string DoctorName = rdr.GetString(1);
         string DoctorSpeciality = rdr.GetString(2);
         Doctor newDoctor = new Doctor(DoctorName, DoctorSpeciality, DoctorId);
-        allCategories.Add(newCategory);
+        allDoctors.Add(newDoctor);
       }
       conn.Close();
       if (conn != null)
@@ -79,7 +79,7 @@ namespace DoctorsOffice.Models
       {
         DoctorId = rdr.GetInt32(0);
         DoctorName = rdr.GetString(1);
-        octorSpeciality = rdr.GetString(2);
+        DoctorSpeciality = rdr.GetString(2);
 
       }
       Doctor newDoctor = new Doctor(DoctorName, DoctorSpeciality, DoctorId);
@@ -91,7 +91,51 @@ namespace DoctorsOffice.Models
       return newDoctor;
     }
 
-    
+    // public List<Patient> GetPatients()
+    // {
+    //   MySqlConnection conn = DB.Connection();
+    //   conn.Open();
+    //   var cmd = conn.CreateCommand() as MySqlCommand;
+    //   cmd.CommandText = @"SELECT item_id FROM categories_items WHERE category_id = @CategoryId;";
+    //   MySqlParameter categoryIdParameter = new MySqlParameter();
+    //   categoryIdParameter.ParameterName = "@CategoryId";
+    //   categoryIdParameter.Value = _id;
+    //   cmd.Parameters.Add(categoryIdParameter);
+    //   var rdr = cmd.ExecuteReader() as MySqlDataReader;
+    //   List<int> itemIds = new List<int> {};
+    //   while(rdr.Read())
+    //   {
+    //     int itemId = rdr.GetInt32(0);
+    //     itemIds.Add(itemId);
+    //   }
+    //   rdr.Dispose();
+    //   List<Item> items = new List<Item> {};
+    //   foreach (int itemId in itemIds)
+    //   {
+    //     var itemQuery = conn.CreateCommand() as MySqlCommand;
+    //     itemQuery.CommandText = @"SELECT * FROM items WHERE id = @ItemId;";
+    //     MySqlParameter itemIdParameter = new MySqlParameter();
+    //     itemIdParameter.ParameterName = "@ItemId";
+    //     itemIdParameter.Value = itemId;
+    //     itemQuery.Parameters.Add(itemIdParameter);
+    //     var itemQueryRdr = itemQuery.ExecuteReader() as MySqlDataReader;
+    //     while(itemQueryRdr.Read())
+    //     {
+    //       int thisItemId = itemQueryRdr.GetInt32(0);
+    //       string itemDescription = itemQueryRdr.GetString(1);
+    //       Item foundItem = new Item(itemDescription, thisItemId);
+    //       items.Add(foundItem);
+    //     }
+    //     itemQueryRdr.Dispose();
+    //   }
+    //   conn.Close();
+    //   if (conn != null)
+    //   {
+    //     conn.Dispose();
+    //   }
+    //   return items;
+    // }
+
 
   }
 }
