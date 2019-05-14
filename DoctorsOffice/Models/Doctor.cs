@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
@@ -10,7 +11,7 @@ namespace DoctorsOffice.Models
     private string _speciality;
     
 
-    public Doctor(string doctorName, string doctorSpeciality int id = 0)
+    public Doctor(string doctorName, string doctorSpeciality, int id = 0)
     {
       _name = doctorName;
       _speciality = doctorSpeciality;

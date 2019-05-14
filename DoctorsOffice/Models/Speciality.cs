@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
@@ -44,7 +45,7 @@ namespace DoctorsOffice.Models
       {
         int SpecialityId = rdr.GetInt32(0);
         string SpecialityName = rdr.GetString(1);
-        Speciality newSpeciality = new Speciality(SpecialityName,  DoctorId);
+        Speciality newSpeciality = new Speciality(SpecialityName, SpecialityId);
         allSpecialities.Add(newSpeciality);
       }
       conn.Close();

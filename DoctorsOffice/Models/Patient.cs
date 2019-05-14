@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 
@@ -112,7 +113,7 @@ namespace DoctorsOffice.Models
         patientName = rdr.GetString(1);
         patientBirthdate = rdr.GetDateTime(2);
       }
-      Patient newPatient = new Patient(patientName, patientBirthdate patientId);
+      Patient newPatient = new Patient(patientName, patientBirthdate, patientId);
       conn.Close();
       if (conn != null)
       {
