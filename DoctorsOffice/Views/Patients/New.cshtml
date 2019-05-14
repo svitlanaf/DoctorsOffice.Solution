@@ -1,0 +1,29 @@
+@using DoctorsOffice.Models;
+<html>
+
+<head>
+  <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <link rel='stylesheet' href='~/css/styles.css'> -->
+</head>
+<body>
+
+
+
+@{
+    Layout = "_Layout";
+}
+
+<form action="/doctors/@Model/patients" method="post">
+ <label for="name">Patient name:</label>
+ <input required id="name" name="name" type="text" /><br>
+ <label for='birthdate'>Birthdate</label>
+<input id='birthdate' name='birthdate' type="date" /><br>
+
+ <button type="submit" >Save</button>
+</form> 
+
+
+</body>
+</html>
