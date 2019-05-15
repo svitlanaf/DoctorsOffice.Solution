@@ -1,7 +1,7 @@
 @using DoctorsOffice.Models;
 
 <h1>Doctors Office</h1>
-<h2>Doctor: @Model["doctor"].GetName()</h2>
+<h2>Doctor: @Model["doctor"].GetName(). @Model["doctor"].GetSpeciality()</h2>
 
 <form method="post" action='/doctors/@Model["doctor"].GetId()/delete'>
   <button type="submit">Delete</button>
@@ -15,7 +15,7 @@
     @foreach (var patient in @Model["doctorPatients"])
     {
       @patient.GetName()<br>
-      @patient.GetBirthdate()<br>
+      @patient.GetBirthdate().ToShortDateString()<br>
       <br>
     }
   
