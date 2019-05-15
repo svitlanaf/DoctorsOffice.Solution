@@ -63,11 +63,7 @@ namespace DoctorsOffice.Controllers
         public ActionResult Destroy(int id)
         {
         Doctor deleteDoctor = Doctor.Find(id);
-        // List<Patient> deletePatients = deleteDoctor.GetPatients();
-        // foreach(Patient patient in deletePatients)
-        // {
-        //     patient.Delete();
-        // }
+
         deleteDoctor.Delete();
         return RedirectToAction("Index");
         }
