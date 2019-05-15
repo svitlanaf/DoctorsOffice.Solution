@@ -59,5 +59,14 @@ namespace DoctorsOffice.Controllers
       }
 
 
+      [ActionName("Destroy"), HttpPost("/patients/{id}/delete")]
+        public ActionResult Destroy(int id)
+        {
+        Patient deletePatient = Patient.Find(id);
+        deletePatient.Delete();
+        return RedirectToAction("Index");
+        }
+
+
   }
 }

@@ -2,6 +2,11 @@
 
 <h1>Doctors Office</h1>
 <h2>Patient: @Model["selectedPatient"].GetName()</h2>
+
+<form method="post" action='/patients/@Model["selectedPatient"].GetId()/delete'>
+  <button type="submit">Delete</button>
+</form>
+
 <hr />
 
 @if (@Model["patientDoctors"].Count != 0)
