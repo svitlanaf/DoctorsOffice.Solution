@@ -43,8 +43,8 @@ namespace DoctorsOffice.Controllers
         
         List<Doctor> patientDoctors = selectedPatient.GetDoctors();
         List<Doctor> allDoctors = Doctor.GetAll();
-        List<Doctor> specialityDoctors = Doctor.GetSpecialities();
-        // add doc get.speciality
+        Doctor selectedDoctor = Doctor.Find(id);
+        List<Speciality> specialityDoctors = selectedDoctor.GetSpecialities();
         model.Add("selectedPatient", selectedPatient);
         model.Add("patientDoctors", patientDoctors);
         model.Add("specialityDoctors", specialityDoctors);
