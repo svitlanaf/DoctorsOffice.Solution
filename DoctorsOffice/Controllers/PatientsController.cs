@@ -40,10 +40,14 @@ namespace DoctorsOffice.Controllers
       {
         Dictionary<string, object> model = new Dictionary<string, object>();
         Patient selectedPatient = Patient.Find(id);
+        
         List<Doctor> patientDoctors = selectedPatient.GetDoctors();
         List<Doctor> allDoctors = Doctor.GetAll();
+        List<Doctor> specialityDoctors = Doctor.GetSpecialities();
+        // add doc get.speciality
         model.Add("selectedPatient", selectedPatient);
         model.Add("patientDoctors", patientDoctors);
+        model.Add("specialityDoctors", specialityDoctors);
         model.Add("allDoctors", allDoctors);
         return View(model);
       }

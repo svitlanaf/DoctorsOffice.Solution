@@ -217,6 +217,42 @@ namespace DoctorsOffice.Models
     }
 
 
+    public List<Speciality> GetSpecialities()
+    {
+
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT specialities.* FROM 
+            doctors JOIN specialities_doctors ON (doctors.id = specialities_doctors.doctor_id)
+                    JOIN specialities ON (specialities_doctors.doctor_id = doctors.id)
+                    WHERE specialities.id = @SpecialityId;";
+        MySqlParameter doctorIdParameter = new MySqlParameter();
+        doctorIdParameter.ParameterName = "@DoctorId";
+        doctorIdParameter.Value = _id;
+        cmd.Parameters.Add(doctorIdParameter);
+        MySqlDataReader specialityQueryRdr = cmd.ExecuteReader() as MySqlDataReader;
+        List<Speciality> specialities = new List<Speciality> {
+        };
+
+        while(specialityQueryRdr.Read())
+        {
+            int thisSpecialityId = specialityQueryRdr.GetInt32(0);
+            string specialityName = specialityQueryRdr.GetString(1);
+            Speciality newSpeciality = new Speciality (specialityName, thisSpecialityId);
+            specialities.Add (newSpeciality);
+        }
+
+        conn.Close();
+        if (conn != null)
+        {
+            conn.Dispose();
+        }
+        return specialities;
+    }
+
+
+
     public void AddPatient (Patient newPatient)
     {
         MySqlConnection conn = DB.Connection();
