@@ -162,7 +162,6 @@ namespace DoctorsOffice.Models
       return newDoctor;
     }
 
-        // Add delete speciality later!!!
     public void Delete()
     {
         MySqlConnection conn = DB.Connection();

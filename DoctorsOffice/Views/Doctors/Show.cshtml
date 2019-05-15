@@ -15,7 +15,7 @@
     @foreach (var patient in @Model["doctorPatients"])
     {
       @patient.GetName()<br>
-      @patient.GetBirthdate().ToShortDateString()<br>
+      <p>Birthdate </p>@patient.GetBirthdate().ToShortDateString()<br>
       <br>
     }
   

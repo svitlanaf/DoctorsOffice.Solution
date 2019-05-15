@@ -50,7 +50,8 @@ namespace DoctorsOffice.Models
     public void Dispose()
     {
       Speciality.ClearAll();
-    //   Speciality.ClearAll();
+      Doctor.ClearAll();
+      Patient.ClearAll();
     }
 
      public void Save()
@@ -144,7 +145,7 @@ namespace DoctorsOffice.Models
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand( "DELETE FROM specialities WHERE id = @SpecialityId; DELETE FROM specialities_doctors WHERE speciality_id = @SpecialityId;", conn);
+        MySqlCommand cmd = new MySqlCommand( "DELETE FROM specialities WHERE id = @SpecialityId;", conn);
         MySqlParameter specialityIdParameter = new MySqlParameter();
         specialityIdParameter.ParameterName = "@SpecialityId";
         specialityIdParameter.Value = this.GetId();
@@ -156,6 +157,67 @@ namespace DoctorsOffice.Models
             conn.Close();
         }
     }
+
+
+    public List<Doctor> GetDoctors()
+    {
+
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"SELECT doctors.* FROM 
+            specialities JOIN specialities_doctors ON (specialities.id = specialities_doctors.speciality_id)
+                    JOIN doctors ON (specialities_doctors.doctor_id = doctors.id)
+                    WHERE specialities.id = @SpecialityId;";
+        MySqlParameter specialityIdParameter = new MySqlParameter();
+        specialityIdParameter.ParameterName = "@SpecialityId";
+        specialityIdParameter.Value = _id;
+        cmd.Parameters.Add(specialityIdParameter);
+        MySqlDataReader doctorQueryRdr = cmd.ExecuteReader() as MySqlDataReader;
+        List<Doctor> doctors = new List<Doctor> {
+        };
+
+        while(doctorQueryRdr.Read())
+        {
+            int thisDoctorId = doctorQueryRdr.GetInt32(0);
+            string doctorName = doctorQueryRdr.GetString(1);
+            string doctorSpeciality = doctorQueryRdr.GetString(2);
+
+            Doctor newDoctor = new Doctor (doctorName, doctorSpeciality, thisDoctorId);
+            doctors.Add (newDoctor);
+        }
+
+        conn.Close();
+        if (conn != null)
+        {
+            conn.Dispose();
+        }
+        return doctors;
+    }
+
+
+    public void AddDoctor (Doctor newDoctor)
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO specialities_doctors (speciality_id, doctor_id) VALUES (@SpecialityId, @DoctorId);";
+        MySqlParameter speciality_id = new MySqlParameter();
+        speciality_id.ParameterName = "@SpecialityId";
+        speciality_id.Value = _id;
+        cmd.Parameters.Add(speciality_id);
+        MySqlParameter doctor_id = new MySqlParameter();
+        speciality_id.ParameterName = "@PatientId";
+        speciality_id.Value = newDoctor.GetId();
+        cmd.Parameters.Add(speciality_id);
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if(conn != null)
+        {
+            conn.Dispose();
+        }
+    }
+
 
   }
 }
