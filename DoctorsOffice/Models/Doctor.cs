@@ -8,13 +8,13 @@ namespace DoctorsOffice.Models
   {
     private int _id;
     private string _name;
-    private string _speciality;
+    // private string _speciality;
     
 
-    public Doctor(string doctorName, string doctorSpeciality, int id = 0)
+    public Doctor(string doctorName,  int id = 0) 
     {
       _name = doctorName;
-      _speciality = doctorSpeciality;
+      // _speciality = doctorSpeciality;
       _id = id;
     }
 
@@ -23,10 +23,10 @@ namespace DoctorsOffice.Models
       return _name;
     }
 
-    public string GetSpeciality()
-    {
-      return _speciality;
-    }
+    // public string GetSpeciality()
+    // {
+    //   return _speciality;
+    // }
 
     public int GetId()
     {
@@ -56,7 +56,7 @@ namespace DoctorsOffice.Models
             Doctor newDoctor = (Doctor) otherDoctor;
             bool idEquality = this.GetId().Equals(newDoctor.GetId());
             bool nameEquality = this.GetName().Equals(newDoctor.GetName());
-            bool specialityEquality = this.GetSpeciality().Equals(newDoctor.GetSpeciality());
+            // bool specialityEquality = this.GetSpeciality().Equals(newDoctor.GetSpeciality());
             return (idEquality && nameEquality);
         }
     }
@@ -82,17 +82,17 @@ namespace DoctorsOffice.Models
         conn.Open();
 
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO doctors (name, speciality) VALUES (@name, @speciality);";
+        cmd.CommandText = @"INSERT INTO doctors (name) VALUES (@name);";
 
         MySqlParameter name = new MySqlParameter();
         name.ParameterName = "@name";
         name.Value = this._name;
         cmd.Parameters.Add(name);
 
-        MySqlParameter speciality = new MySqlParameter();
-        speciality.ParameterName = "@speciality";
-        speciality.Value = this._speciality;
-        cmd.Parameters.Add(speciality);
+        // MySqlParameter speciality = new MySqlParameter();
+        // speciality.ParameterName = "@speciality";
+        // speciality.Value = this._speciality;
+        // cmd.Parameters.Add(speciality);
 
         cmd.ExecuteNonQuery();
         _id = (int) cmd.LastInsertedId;
@@ -117,8 +117,8 @@ namespace DoctorsOffice.Models
       {
         int DoctorId = rdr.GetInt32(0);
         string DoctorName = rdr.GetString(1);
-        string DoctorSpeciality = rdr.GetString(2);
-        Doctor newDoctor = new Doctor(DoctorName, DoctorSpeciality, DoctorId);
+        // string DoctorSpeciality = rdr.GetString(2);
+        Doctor newDoctor = new Doctor(DoctorName, DoctorId);
         allDoctors.Add(newDoctor);
       }
       conn.Close();
@@ -142,18 +142,18 @@ namespace DoctorsOffice.Models
       cmd.Parameters.Add(searchId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int DoctorId = 0;
-      Console.WriteLine("test");
+      // Console.WriteLine("test");
       string DoctorName = "";
-      string DoctorSpeciality = "";
+      // string DoctorSpeciality = "";
       while(rdr.Read())
       {
         DoctorId = rdr.GetInt32(0);
-        Console.WriteLine(DoctorId);
+        // Console.WriteLine(DoctorId);
         DoctorName = rdr.GetString(1);
-        DoctorSpeciality = rdr.GetString(2);
+        // DoctorSpeciality = rdr.GetString(2);
 
       }
-      Doctor newDoctor = new Doctor(DoctorName, DoctorSpeciality, DoctorId);
+      Doctor newDoctor = new Doctor(DoctorName, DoctorId);
       conn.Close();
       if (conn != null)
       {
@@ -239,7 +239,7 @@ namespace DoctorsOffice.Models
         }
     }
 
-    public void Edit(string newName, string newSpeciality)
+    public void Edit(string newName)
         {
         MySqlConnection conn = DB.Connection();
         conn.Open();
@@ -255,13 +255,14 @@ namespace DoctorsOffice.Models
         name.Value = newName;
         cmd.Parameters.Add(name);
 
-        MySqlParameter speciality = new MySqlParameter();
-        speciality.ParameterName = "@newBSpeciality";
-        speciality.Value = newSpeciality;
-        cmd.Parameters.Add(speciality);
+        // MySqlParameter speciality = new MySqlParameter();
+        // speciality.ParameterName = "@newBSpeciality";
+        // speciality.Value = newSpeciality;
+        // cmd.Parameters.Add(speciality);
+
         cmd.ExecuteNonQuery();
         _name = newName;
-        _speciality = newSpeciality;
+        // _speciality = newSpeciality;
         conn.Close();
         if (conn != null)
             {

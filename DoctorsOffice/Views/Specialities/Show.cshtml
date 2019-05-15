@@ -8,11 +8,11 @@
 </form>
 <hr />
 
-@if (@Model["specialitiesDoctors"].Count != 0)
+@if (@Model["specialityDoctors"].Count != 0)
 {
   <h4>Here are all the doctors of this speciality:</h4>
   
-    @foreach (var doctor in @Model["specialitiesDoctors"])
+    @foreach (var doctor in @Model["specialityDoctors"])
     {
       @doctor.GetName()<br>
     }
@@ -34,7 +34,7 @@
   <button type='submit'>Add</button>
 </form>
 
-<h3><a href='/doctors'>Add a new doctor</a></h3><br>
+<h3><a href='/doctors/new'>Add a new doctor</a></h3><br>
 
 
 

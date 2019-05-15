@@ -53,8 +53,11 @@ namespace DoctorsOffice.Controllers
     public ActionResult AddDoctor(int specialityId, int doctorId)
       {
         Speciality speciality = Speciality.Find(specialityId);
+        // Console.WriteLine(specialityId);
         Doctor doctor = Doctor.Find(doctorId);
+        // Console.WriteLine(doctorId);
         speciality.AddDoctor(doctor);
+        // Console.WriteLine("added doc");
         return RedirectToAction("Show",  new { id = specialityId });
       }
 

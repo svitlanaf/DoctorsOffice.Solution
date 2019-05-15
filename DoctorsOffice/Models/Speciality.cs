@@ -116,7 +116,12 @@ namespace DoctorsOffice.Models
       while(rdr.Read())
       {
         SpecialityId = rdr.GetInt32(0);
+
+        Console.WriteLine(SpecialityId);
+
         SpecialityName = rdr.GetString(1);
+
+        Console.WriteLine(SpecialityName);
       }
       Speciality newSpeciality = new Speciality(SpecialityName, SpecialityId);
       conn.Close();
@@ -181,9 +186,9 @@ namespace DoctorsOffice.Models
         {
             int thisDoctorId = doctorQueryRdr.GetInt32(0);
             string doctorName = doctorQueryRdr.GetString(1);
-            string doctorSpeciality = doctorQueryRdr.GetString(2);
+            // string doctorSpeciality = doctorQueryRdr.GetString(2);
 
-            Doctor newDoctor = new Doctor (doctorName, doctorSpeciality, thisDoctorId);
+            Doctor newDoctor = new Doctor (doctorName, thisDoctorId);
             doctors.Add (newDoctor);
         }
 
@@ -207,9 +212,9 @@ namespace DoctorsOffice.Models
         speciality_id.Value = _id;
         cmd.Parameters.Add(speciality_id);
         MySqlParameter doctor_id = new MySqlParameter();
-        speciality_id.ParameterName = "@PatientId";
-        speciality_id.Value = newDoctor.GetId();
-        cmd.Parameters.Add(speciality_id);
+        doctor_id.ParameterName = "@DoctorId";
+        doctor_id.Value = newDoctor.GetId();
+        cmd.Parameters.Add(doctor_id);
         cmd.ExecuteNonQuery();
         conn.Close();
         if(conn != null)

@@ -19,6 +19,7 @@ namespace DoctorsOffice.Tests
     {
       Doctor.ClearAll();
       Patient.ClearAll();
+      Speciality.ClearAll();
     }
 
 
@@ -27,9 +28,9 @@ namespace DoctorsOffice.Tests
     {
       Patient testPatient = new Patient("test", new DateTime(1/2/2019));
       testPatient.Save();
-      Doctor testDoctor1 = new Doctor("test", "test");
+      Doctor testDoctor1 = new Doctor("test");
       testDoctor1.Save();
-      Doctor testDoctor2 = new Doctor("test1", "test1");
+      Doctor testDoctor2 = new Doctor("test1");
       testDoctor2.Save();
       testPatient.AddDoctor(testDoctor1);
       List<Doctor> result = testPatient.GetDoctors();
@@ -42,7 +43,7 @@ namespace DoctorsOffice.Tests
     {
       Patient testPatient = new Patient("test", new DateTime(1/2/2019));
       testPatient.Save();
-      Doctor testDoctor = new Doctor("test1", "test1");
+      Doctor testDoctor = new Doctor("test1");
       testDoctor.Save();
       testPatient.AddDoctor(testDoctor);
       List<Doctor> result = testPatient.GetDoctors();

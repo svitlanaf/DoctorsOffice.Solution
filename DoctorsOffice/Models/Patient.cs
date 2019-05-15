@@ -238,8 +238,8 @@ namespace DoctorsOffice.Models
             {
                 int thisDoctorId = doctorQueryRdr.GetInt32(0);
                 string doctorName = doctorQueryRdr.GetString(1);
-                string doctorSpeciality = doctorQueryRdr.GetString(2);
-                Doctor foundDoctor = new Doctor(doctorName, doctorSpeciality, thisDoctorId);
+                // string doctorSpeciality = doctorQueryRdr.GetString(2);
+                Doctor foundDoctor = new Doctor(doctorName, thisDoctorId);
                 doctors.Add(foundDoctor);
             }
             doctorQueryRdr.Dispose();

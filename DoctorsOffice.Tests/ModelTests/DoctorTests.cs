@@ -19,13 +19,14 @@ namespace DoctorsOffice.Tests
     {
       Doctor.ClearAll();
       Patient.ClearAll();
+      Speciality.ClearAll();
     }
 
 
   [TestMethod]
     public void Test_AddPatient_AddsPatientToDoctor()
     {
-      Doctor testDoctor = new Doctor("test", "test");
+      Doctor testDoctor = new Doctor("test");
       testDoctor.Save();
       Patient testPatient = new Patient("test", new DateTime(1/2/2019));
       testPatient.Save();
@@ -41,7 +42,7 @@ namespace DoctorsOffice.Tests
     [TestMethod]
     public void GetPatients_ReturnsAllDoctorPatients_PatientList()
     {
-      Doctor testDoctor = new Doctor("test", "test");
+      Doctor testDoctor = new Doctor("test");
       testDoctor.Save();
       Patient testPatient = new Patient("test", new DateTime(1/2/2019));
       testPatient.Save();

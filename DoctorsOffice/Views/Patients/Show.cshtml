@@ -15,7 +15,7 @@
  
     @foreach (Doctor doctor in @Model["patientDoctors"])
     {
-    @doctor.GetSpeciality()<br>
+    @doctor.GetName()<br>
     }
   
 }
@@ -27,7 +27,7 @@
   <select id='doctorId' name='doctorId' type='text'>
     @foreach (var doctor in @Model["allDoctors"])
     {
-      <option value='@doctor.GetId()'>@doctor.GetSpeciality()</option>
+      <option value='@doctor.GetId()'>@doctor.GetName()</option>
     }
   </select>
   <button type='submit'>Add</button>
