@@ -1,0 +1,42 @@
+@using DoctorsOffice.Models;
+
+<h1>Doctors Office</h1>
+<h2>Speciality: @Model["speciality"].GetName()</h2>
+
+<form method="post" action='/specialities/@Model["speciality"].GetId()/delete'>
+  <button type="submit">Delete</button>
+</form>
+<hr />
+
+@if (@Model["specialitiesDoctors"].Count != 0)
+{
+  <h4>Here are all the doctors of this speciality:</h4>
+  
+    @foreach (var doctor in @Model["specialitiesDoctors"])
+    {
+      @doctor.GetName()<br>
+    }
+  
+}
+
+<h4>Add a doctor to this speciality:</h4>
+
+<form action='/specialities/@Model["speciality"].GetId()/doctors/new' method='post'>
+  <label for='doctorId'>Select a doctor</label>
+  <select id='doctorId' name='doctorId' type='text'>
+
+    @foreach (var doctor in @Model["allDoctors"])
+    {
+      <option value='@doctor.GetId()'>@doctor.GetName()</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<h3><a href='/doctors'>Add a new doctor</a></h3><br>
+
+
+
+
+<p><a href="/">Return to Main Page</a></p>
