@@ -2,6 +2,10 @@
 
 <h1>Doctors Office</h1>
 <h2>Doctor: @Model["doctor"].GetName()</h2>
+
+<form method="post" action='/doctors/@Model["doctor"].GetId()/delete'>
+  <button type="submit">Delete</button>
+</form>
 <hr />
 
 @if (@Model["doctorPatients"].Count != 0)
@@ -32,6 +36,9 @@
   <button type='submit'>Add</button>
 </form>
 
-<h3><a href='/patients'>Add a new patient</a></h3>
+<h3><a href='/patients'>Add a new patient</a></h3><br>
+
+
+
 
 <p><a href="/">Return to Main Page</a></p>

@@ -142,11 +142,13 @@ namespace DoctorsOffice.Models
       cmd.Parameters.Add(searchId);
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
       int DoctorId = 0;
+      Console.WriteLine("test");
       string DoctorName = "";
       string DoctorSpeciality = "";
       while(rdr.Read())
       {
         DoctorId = rdr.GetInt32(0);
+        Console.WriteLine(DoctorId);
         DoctorName = rdr.GetString(1);
         DoctorSpeciality = rdr.GetString(2);
 
@@ -165,7 +167,7 @@ namespace DoctorsOffice.Models
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();
-        MySqlCommand cmd = new MySqlCommand( "DELETE FROM doctors WHERE id = @DoctorId; DELETE FROM doctors_patients WHERE doctor_id = @DoctorId;", conn);
+        MySqlCommand cmd = new MySqlCommand( "DELETE FROM doctors WHERE id = @DoctorId;", conn);
         MySqlParameter doctorIdParameter = new MySqlParameter();
         doctorIdParameter.ParameterName = "@DoctorId";
         doctorIdParameter.Value = this.GetId();

@@ -57,6 +57,20 @@ namespace DoctorsOffice.Controllers
         doctor.AddPatient(patient);
         return RedirectToAction("Show",  new { id = doctorId });
       }
+      
+
+      [ActionName("Destroy"), HttpPost("/doctors/{id}/delete")]
+        public ActionResult Destroy(int id)
+        {
+        Doctor deleteDoctor = Doctor.Find(id);
+        List<Patient> deletePatients = deleteDoctor.GetPatients();
+        foreach(Patient patient in deletePatients)
+        {
+            patient.Delete();
+        }
+        deleteDoctor.Delete();
+        return RedirectToAction("Index");
+        }
 
 
   }

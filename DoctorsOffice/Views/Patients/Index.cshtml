@@ -7,8 +7,7 @@
   
     @foreach (var patient in Model)
     {
-      @patient.GetName()<br>
-      @patient.GetBirthdate()<br>
+      <a href="/patients/@patient.GetId()">@patient.GetName()</a><br>
     }
 }
 
