@@ -217,7 +217,30 @@ namespace DoctorsOffice.Models
     }
 
 
-    public List<Speciality> GetSpecialities()
+    public void AddPatient (Patient newPatient)
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        var cmd = conn.CreateCommand() as MySqlCommand;
+        cmd.CommandText = @"INSERT INTO doctors_patients (doctor_id, patient_id) VALUES (@DoctorId, @PatientId);";
+        MySqlParameter doctor_id = new MySqlParameter();
+        doctor_id.ParameterName = "@DoctorId";
+        doctor_id.Value = _id;
+        cmd.Parameters.Add(doctor_id);
+        MySqlParameter patient_id = new MySqlParameter();
+        patient_id.ParameterName = "@PatientId";
+        patient_id.Value = newPatient.GetId();
+        cmd.Parameters.Add(patient_id);
+        cmd.ExecuteNonQuery();
+        conn.Close();
+        if(conn != null)
+        {
+            conn.Dispose();
+        }
+    }
+
+
+     public List<Speciality> GetSpecialities()
     {
 
         MySqlConnection conn = DB.Connection();
@@ -252,21 +275,22 @@ namespace DoctorsOffice.Models
     }
 
 
-
-    public void AddPatient (Patient newPatient)
+    public void AddSpeciality (Speciality newSpeciality)
     {
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO doctors_patients (doctor_id, patient_id) VALUES (@DoctorId, @PatientId);";
+        cmd.CommandText = @"INSERT INTO specialities_doctors (speciality_id, doctor_id,) VALUES (@SpecialityId, @DoctorId);";
+        MySqlParameter speciality_id = new MySqlParameter();
+        speciality_id.ParameterName = "@SpecialityId";
+        speciality_id.Value = newSpeciality.GetId();
+        cmd.Parameters.Add(speciality_id);
+        
         MySqlParameter doctor_id = new MySqlParameter();
         doctor_id.ParameterName = "@DoctorId";
         doctor_id.Value = _id;
         cmd.Parameters.Add(doctor_id);
-        MySqlParameter patien_id = new MySqlParameter();
-        patien_id.ParameterName = "@PatientId";
-        patien_id.Value = newPatient.GetId();
-        cmd.Parameters.Add(patien_id);
+        
         cmd.ExecuteNonQuery();
         conn.Close();
         if(conn != null)
@@ -274,6 +298,7 @@ namespace DoctorsOffice.Models
             conn.Dispose();
         }
     }
+
 
     public void Edit(string newName)
         {

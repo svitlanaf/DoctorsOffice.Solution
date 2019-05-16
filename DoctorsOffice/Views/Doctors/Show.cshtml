@@ -21,7 +21,7 @@
   
 }
 
-<h4>Add a patient to this doctor:</h4>
+<h4>Add an existing patient to this doctor:</h4>
 
 <form action='/doctors/@Model["doctor"].GetId()/patients/new' method='post'>
   <label for='patientId'>Select a patient</label>
@@ -36,7 +36,7 @@
   <button type='submit'>Add</button>
 </form>
 
-<h3><a href='/patients'>Add a new patient</a></h3><br>
+<h3><a href='/patients/new'>Add a new patient</a></h3><br>
 
 
 
