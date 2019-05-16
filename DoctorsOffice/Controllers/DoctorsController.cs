@@ -28,10 +28,15 @@ namespace DoctorsOffice.Controllers
       [HttpPost("/doctors")]
     public ActionResult Create(string doctorName)
       {
+        Dictionary<string, object> model = new Dictionary<string, object>();
         Doctor newDoctor = new Doctor(doctorName);
         newDoctor.Save();
         List<Doctor> allDoctors = Doctor.GetAll();
-        return View("Index", allDoctors);
+        List<Speciality> allSpecialities = Speciality.GetAll();
+
+        model.Add("allDoctors", allDoctors);
+        model.Add("allSpecialities", allSpecialities);
+        return View("Index", model);
       }
 
 

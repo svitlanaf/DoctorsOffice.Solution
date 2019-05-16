@@ -6,6 +6,12 @@
   <!-- <label for="doctorSpeciality">Doctor speciality</label>
   <input id="doctorSpeciality" name="doctorSpeciality" type="text"> -->
 
+ @foreach (var speciality in @Model["allSpecialities"])
+    {
+      <option value='@speciality.GetId()'>@speciality.GetName()</option>
+    }
+  </select>
+
   <button type="submit">Add</button>
 </form>
 
