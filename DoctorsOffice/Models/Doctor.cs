@@ -248,8 +248,8 @@ namespace DoctorsOffice.Models
         var cmd = conn.CreateCommand() as MySqlCommand;
         cmd.CommandText = @"SELECT specialities.* FROM 
             doctors JOIN specialities_doctors ON (doctors.id = specialities_doctors.doctor_id)
-                    JOIN specialities ON (specialities_doctors.doctor_id = doctors.id)
-                    WHERE specialities.id = @SpecialityId;";
+                    JOIN specialities ON (specialities_doctors.speciality_id = specialities.id)
+                    WHERE doctors.id = @DoctorId;";
         MySqlParameter doctorIdParameter = new MySqlParameter();
         doctorIdParameter.ParameterName = "@DoctorId";
         doctorIdParameter.Value = _id;
@@ -260,9 +260,9 @@ namespace DoctorsOffice.Models
 
         while(specialityQueryRdr.Read())
         {
-            int thisSpecialityId = specialityQueryRdr.GetInt32(0);
+            int specialityId = specialityQueryRdr.GetInt32(0);
             string specialityName = specialityQueryRdr.GetString(1);
-            Speciality newSpeciality = new Speciality (specialityName, thisSpecialityId);
+            Speciality newSpeciality = new Speciality (specialityName, specialityId);
             specialities.Add (newSpeciality);
         }
 
@@ -280,16 +280,18 @@ namespace DoctorsOffice.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"INSERT INTO specialities_doctors (speciality_id, doctor_id,) VALUES (@SpecialityId, @DoctorId);";
+        cmd.CommandText = @"INSERT INTO specialities_doctors (speciality_id, doctor_id) VALUES (@SpecialityId, @DoctorId);";
         MySqlParameter speciality_id = new MySqlParameter();
         speciality_id.ParameterName = "@SpecialityId";
         speciality_id.Value = newSpeciality.GetId();
         cmd.Parameters.Add(speciality_id);
-        
+        Console.WriteLine(speciality_id);
+
         MySqlParameter doctor_id = new MySqlParameter();
         doctor_id.ParameterName = "@DoctorId";
         doctor_id.Value = _id;
         cmd.Parameters.Add(doctor_id);
+        Console.WriteLine(doctor_id);
         
         cmd.ExecuteNonQuery();
         conn.Close();

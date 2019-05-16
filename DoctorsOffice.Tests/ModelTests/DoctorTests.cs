@@ -39,23 +39,6 @@ namespace DoctorsOffice.Tests
       CollectionAssert.AreEqual(testList, result);
     }
 
-
-    [TestMethod]
-    public void GetPatients_ReturnsAllDoctorPatients_PatientList()
-    {
-      Doctor testDoctor = new Doctor("test");
-      testDoctor.Save();
-      Patient testPatient = new Patient("test", new DateTime(1/2/2019));
-      testPatient.Save();
-      Patient testPatient2 = new Patient("test1", new DateTime(1/2/2019));
-      testPatient2.Save();
-      testDoctor.AddPatient(testPatient);
-      List<Patient> savedPatients = testDoctor.GetPatients();
-      List<Patient> testList = new List<Patient> {testPatient};
-      CollectionAssert.AreEqual(testList, savedPatients);
-    }
-
-
     [TestMethod]
     public void Test_AddSpeciality_AddsSpecialityToDoctor()
     {
@@ -70,6 +53,23 @@ namespace DoctorsOffice.Tests
       List<Speciality> result = testDoctor.GetSpecialities();
       List<Speciality> testList = new List<Speciality>{testSpeciality, testSpeciality2};
       CollectionAssert.AreEqual(testList, result);
+    }
+
+
+
+    [TestMethod]
+    public void GetPatients_ReturnsAllDoctorPatients_PatientList()
+    {
+      Doctor testDoctor = new Doctor("test");
+      testDoctor.Save();
+      Patient testPatient = new Patient("test", new DateTime(1/2/2019));
+      testPatient.Save();
+      Patient testPatient2 = new Patient("test1", new DateTime(1/2/2019));
+      testPatient2.Save();
+      testDoctor.AddPatient(testPatient);
+      List<Patient> savedPatients = testDoctor.GetPatients();
+      List<Patient> testList = new List<Patient> {testPatient};
+      CollectionAssert.AreEqual(testList, savedPatients);
     }
 
 

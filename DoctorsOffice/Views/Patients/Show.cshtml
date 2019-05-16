@@ -12,17 +12,23 @@
 @if (@Model["patientDoctors"].Count != 0)
 {
   <h4>This patient has these doctors:</h4>
+
  
-    @foreach (Speciality speciality in @Model["specialityDoctors"])
-    {
-      @speciality.GetName()<br>
-    }
     @foreach (Doctor doctor in @Model["patientDoctors"])
-    {
-    @doctor.GetName()<br>
+    { 
+
+      <h2>@doctor.GetName()</h2><br>
+
+      @foreach (Speciality speciality in doctor.GetSpecialities())
+      {
+        @speciality.GetName()<br>
+      }
+
+      
     }
-  
 }
+
+
 
 <h4>Add a doctor to this patient:</h4>
 

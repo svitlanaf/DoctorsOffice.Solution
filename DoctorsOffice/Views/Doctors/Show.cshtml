@@ -21,6 +21,16 @@
   
 }
 
+
+  <h4>Here are all the specialities of this doctor:</h4>
+  
+    @foreach (var specialty in @Model["allDoctorSpecialty"])
+    {
+      @specialty.GetName();
+      <br>
+    }
+
+
 <h4>Add an existing patient to this doctor:</h4>
 
 <form action='/doctors/@Model["doctor"].GetId()/patients/new' method='post'>
@@ -35,6 +45,8 @@
   </select>
   <button type='submit'>Add</button>
 </form>
+
+
 
 <h3><a href='/patients/new'>Add a new patient</a></h3><br>
 
