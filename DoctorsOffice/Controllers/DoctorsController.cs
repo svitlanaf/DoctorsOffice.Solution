@@ -21,22 +21,18 @@ namespace DoctorsOffice.Controllers
       [HttpGet("/doctors/new")]
       public ActionResult New()
       {
-        return View();
+        List<Speciality> allSpecialities = Speciality.GetAll();
+        return View(allSpecialities);
       }
 
 
       [HttpPost("/doctors")]
     public ActionResult Create(string doctorName)
-      {
-        Dictionary<string, object> model = new Dictionary<string, object>();
-        Doctor newDoctor = new Doctor(doctorName);
-        newDoctor.Save();
+      {   
+        Doctor newDoctor = new Doctor(doctorName);    
         List<Doctor> allDoctors = Doctor.GetAll();
-        List<Speciality> allSpecialities = Speciality.GetAll();
-
-        model.Add("allDoctors", allDoctors);
-        model.Add("allSpecialities", allSpecialities);
-        return View("Index", model);
+        newDoctor.Save();
+        return View("Index", allDoctors);
       }
 
 

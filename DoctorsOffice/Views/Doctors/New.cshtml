@@ -3,17 +3,20 @@
 <form action="/doctors" method="post">
   <label for="doctorName">Doctor name</label>
   <input id="doctorName" name="doctorName" type="text">
-  <!-- <label for="doctorSpeciality">Doctor speciality</label>
-  <input id="doctorSpeciality" name="doctorSpeciality" type="text"> -->
 
- @foreach (var speciality in @Model["allSpecialities"])
-    {
-      <option value='@speciality.GetId()'>@speciality.GetName()</option>
-    }
+
+  <select id='specialityId' name='specialityId' type='text'>
+    @foreach (var speciality in @Model["allSpecialities"])
+        {
+          <option value='@speciality.GetId()'>@speciality.GetName()</option>
+        }
   </select>
+
 
   <button type="submit">Add</button>
 </form>
 
 <p><a href="/">Back home</a></p>
 <p><a href="/doctors">Back to doctors</a></p>
+
+

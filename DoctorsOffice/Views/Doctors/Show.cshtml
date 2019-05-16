@@ -35,6 +35,7 @@
 
 <form action='/doctors/@Model["doctor"].GetId()/patients/new' method='post'>
   <label for='patientId'>Select a patient</label>
+  
   <select id='patientId' name='patientId' type='text'>
 
     @foreach (var patient in @Model["allPatients"])
