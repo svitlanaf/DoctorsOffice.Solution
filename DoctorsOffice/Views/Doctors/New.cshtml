@@ -1,12 +1,12 @@
 <h1>Add a doctor</h1>
 
-<form action="/doctors" method="post">
+<form action="/doctors/create" method="post">
   <label for="doctorName">Doctor name</label>
   <input id="doctorName" name="doctorName" type="text">
 
 
   <select id='specialityId' name='specialityId' type='text'>
-    @foreach (var speciality in @Model["allSpecialities"])
+    @foreach (var speciality in @Model)
         {
           <option value='@speciality.GetId()'>@speciality.GetName()</option>
         }

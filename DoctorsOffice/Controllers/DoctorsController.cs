@@ -26,7 +26,7 @@ namespace DoctorsOffice.Controllers
       }
 
 
-      [HttpPost("/doctors")]
+      [HttpPost("/doctors/create")]
     public ActionResult Create(string doctorName)
       {   
         Doctor newDoctor = new Doctor(doctorName);    
@@ -63,7 +63,7 @@ namespace DoctorsOffice.Controllers
       }
 
 
-      [ActionName("Destroy"), HttpPost("/doctors/{id}/delete")]
+      [HttpPost("/doctors/{id}/delete")]
         public ActionResult Destroy(int id)
         {
         Doctor deleteDoctor = Doctor.Find(id);
