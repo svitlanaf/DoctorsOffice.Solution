@@ -8,7 +8,7 @@ namespace DoctorsOffice.Models
   {
     private int _id;
     private string _name;
-    
+
 
     public Speciality(string specialityName, int id = 0)
     {
@@ -170,7 +170,7 @@ namespace DoctorsOffice.Models
         MySqlConnection conn = DB.Connection();
         conn.Open();
         var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"SELECT doctors.* FROM 
+        cmd.CommandText = @"SELECT doctors.* FROM
             specialities JOIN specialities_doctors ON (specialities.id = specialities_doctors.speciality_id)
                     JOIN doctors ON (specialities_doctors.doctor_id = doctors.id)
                     WHERE specialities.id = @SpecialityId;";
@@ -186,7 +186,6 @@ namespace DoctorsOffice.Models
         {
             int thisDoctorId = doctorQueryRdr.GetInt32(0);
             string doctorName = doctorQueryRdr.GetString(1);
-            // string doctorSpeciality = doctorQueryRdr.GetString(2);
 
             Doctor newDoctor = new Doctor (doctorName, thisDoctorId);
             doctors.Add (newDoctor);

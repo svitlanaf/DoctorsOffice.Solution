@@ -31,7 +31,7 @@ namespace DoctorsOffice.Controllers
         Speciality newSpeciality = new Speciality(specialityName);
         newSpeciality.Save();
         List<Speciality> allSpecialities = Speciality.GetAll();
-        return View("Index", allSpecialities);
+        return RedirectToAction("Index");
       }
 
 
@@ -43,7 +43,7 @@ namespace DoctorsOffice.Controllers
           List<Doctor> specialityDoctors = selectedSpeciality.GetDoctors();
           List<Doctor> allDoctors = Doctor.GetAll();
           model.Add("speciality", selectedSpeciality);
-          model.Add("specialityDoctors", specialityDoctors);  
+          model.Add("specialityDoctors", specialityDoctors);
           model.Add("allDoctors", allDoctors);
           return View(model);
       }

@@ -26,7 +26,7 @@ namespace DoctorsOffice.Controllers
       }
 
 
-      [HttpPost("/doctors/create")]
+      [HttpPost("/doctors")]
     public ActionResult Create(string doctorName)
       {   
         Doctor newDoctor = new Doctor(doctorName);    

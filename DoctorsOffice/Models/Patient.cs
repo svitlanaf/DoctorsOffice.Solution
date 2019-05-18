@@ -9,7 +9,7 @@ namespace DoctorsOffice.Models
     private int _id;
     private string _name;
     private DateTime _birthdate;
-    
+
 
     public Patient(string patientName, DateTime patientBirthdate, int id = 0)
     {
@@ -44,8 +44,9 @@ namespace DoctorsOffice.Models
     {
       Doctor.ClearAll();
       Patient.ClearAll();
+      Speciality.ClearAll();
     }
-    
+
 
     public override bool Equals(System.Object otherPatient)
         {

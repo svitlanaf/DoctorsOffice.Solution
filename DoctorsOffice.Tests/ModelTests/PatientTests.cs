@@ -7,10 +7,10 @@ using System.Linq;
 namespace DoctorsOffice.Tests
 {
   [TestClass]
-  public class PtientTest : IDisposable
+  public class PatientTest : IDisposable
   {
 
-    public PtientTest()
+    public PatientTest()
     {
       DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=doctors_office_test;";
     }
@@ -24,7 +24,7 @@ namespace DoctorsOffice.Tests
 
 
   [TestMethod]
-    public void GetDoctors_ReturnsAllPatientDOctors_DoctorList()
+    public void GetDoctors_ReturnsAllPatientDoctors_DoctorList()
     {
       Patient testPatient = new Patient("test", new DateTime(1/2/2019));
       testPatient.Save();
